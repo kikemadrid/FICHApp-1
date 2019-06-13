@@ -30,6 +30,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
     EditText cajatextonombreempresa;
     DB dataBase;
     Empleado e;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +97,18 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
     public void registrar(View v) {
 
         dataBase.empresas.nuevo(recogerDatosCajas());
+        intent = new Intent(this,LoginActivity.class);
+        intent.putExtra("EMPLEADO", e);
+        startActivity(intent);
 
     }
 
     public void modificar(View v) {
 
         dataBase.empresas.actualizar(recogerDatosCajas());
+        intent = new Intent(this,LoginActivity.class);
+        intent.putExtra("EMPLEADO", e);
+        startActivity(intent);
 
     }
 
@@ -114,6 +121,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 dataBase.empresas.eliminar(recogerDatosCajas().getId_empresa());
+                lanzarIntent();
             }
         });
         dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -129,5 +137,10 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         //return new Empresa(cajatextocif.getText().toString(), cajatextonombreempresa.getText().toString(), cajatextoresp.getText().toString(), cajatextomail.getText().toString());
     }
 
+    public void lanzarIntent(){
+        intent = new Intent(this,LoginActivity.class);
+        intent.putExtra("EMPLEADO", e);
+        startActivity(intent);
+    }
 
 }

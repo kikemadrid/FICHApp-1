@@ -10,18 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".acitividades.RegistroEmpresaActivity"></activity>
+        <activity android:name=".acitividades.RegistroEmpresaActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".acitividades.RegistroEmpleadoActivity" />
         <activity android:name=".acitividades.MenuEmpleadoActivity" />
         <activity android:name=".acitividades.MenuGestorActivity" />
         <activity android:name=".acitividades.AyudaActivity" />
         <activity android:name=".acitividades.AvisosLegalesActivity" />
         <activity android:name=".acitividades.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

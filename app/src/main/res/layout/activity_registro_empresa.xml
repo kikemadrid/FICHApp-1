@@ -16,8 +16,8 @@
         android:id="@+id/tilcif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp">
 
@@ -35,13 +35,11 @@
         android:id="@+id/tilnombreempresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        app:passwordToggleEnabled="true"
-        app:counterEnabled="true"
-        app:counterMaxLength="30">
+        app:passwordToggleEnabled="true">
         <EditText
             android:id="@+id/cajanombreempresa"
             android:layout_width="match_parent"
@@ -55,8 +53,8 @@
         android:id="@+id/tilresponsable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:passwordToggleEnabled="true">
@@ -73,8 +71,8 @@
         android:id="@+id/tilemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:passwordToggleEnabled="true">
@@ -86,15 +84,31 @@
             android:hint="Email"
             android:inputType="textEmailAddress"/>
     </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="50dp"
+        android:text="Logo empresa " />
 
-
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_photo_library_black_24dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/botonenviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:onClick="registrar"
@@ -103,8 +117,8 @@
         android:id="@+id/botonmodificar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:onClick="modificar"
@@ -113,8 +127,8 @@
         android:id="@+id/botoneliminar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:onClick="eliminar"

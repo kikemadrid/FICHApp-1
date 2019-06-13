@@ -68,7 +68,7 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarCif (String cif, EditText caja_texto){
-        if (!Utilidades.cifValido (cif)) {
+        if (!Utilidades.nifValido (cif)) {
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcif);
             wrapmail.setError("CIF Incorrecto");
