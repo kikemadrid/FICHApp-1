@@ -6,14 +6,15 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.appk.beans.Fichaje;
-import com.example.appk.controlador.DB;
-import com.example.appk.i_dao.IFichajeDao;
-import com.example.appk.i_esquema.IFichajeEsquema;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.cftic.fichapp.bean.Fichaje;
+import edu.cftic.fichapp.persistencia.DB;
+import edu.cftic.fichapp.persistencia.esquemas.IFichajeEsquema;
+import edu.cftic.fichapp.persistencia.interfaces.IFichajeDao;
 
 public class FichajeDao extends CRUD implements IFichajeDao, IFichajeEsquema {
 
