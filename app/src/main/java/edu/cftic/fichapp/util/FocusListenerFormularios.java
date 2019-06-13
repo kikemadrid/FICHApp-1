@@ -68,9 +68,9 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarCif (String cif, EditText caja_texto){
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcif);
         if (!Utilidades.nifValido (cif)) {
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcif);
             wrapmail.setError("CIF Incorrecto");
             caja_texto.setText("");
         } else {
@@ -79,9 +79,22 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarNombreEmpresa (String empresa, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilnombreempresa);
         if (!Utilidades.validarNombre(empresa)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilnombreempresa);
+            wrapmail.setError("Incorrecto.");
+            caja_texto.setText("");
+        } else {
+            wrapmail.setErrorEnabled(false);
+        }
+    }
+
+
+
+    public void validarNombreResponsable (String nombre, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilresponsable);
+        if (!Utilidades.validarNombre(nombre)){
+            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto.");
             caja_texto.setText("");
         } else {
@@ -91,9 +104,9 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
 
 
     public void validarEmail (String email, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
         if (!Utilidades.emailValido (email)) {
             // Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
             wrapmail.setError("Mail incorrecto");
             caja_texto.setText("");
         } else {
@@ -102,21 +115,10 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
 
-    public void validarNombreResponsable (String nombre, EditText caja_texto) {
-        if (!Utilidades.validarNombre(nombre)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilresponsable);
-            wrapmail.setError("Incorrecto.");
-            caja_texto.setText("");
-        } else {
-            wrapmail.setErrorEnabled(false);
-        }
-    }
-
     public void validarNombreEmpleado (String nombre, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajanombre);
         if (!Utilidades.validarNombre(nombre)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajanombre);
             wrapmail.setError("Incorrecto. Entre 1 y 30 caracteres");
             caja_texto.setText("");
         } else {
@@ -125,9 +127,9 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarNombreUsuario (String nombre, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajausername);
         if (!Utilidades.validarNombre(nombre)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajausername);
             wrapmail.setError("Incorrecto. Entre 1 y 30 caracteres");
             caja_texto.setText("");
         } else {
@@ -136,9 +138,9 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarApellidosEmpleado (String nombre, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajaapellidos);
         if (!Utilidades.validarNombre(nombre)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajaapellidos);
             wrapmail.setError("Incorrecto. Entre 1 y 30 caracteres");
             caja_texto.setText("");
         } else {
@@ -147,9 +149,9 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarPass(String pass, EditText caja_texto){
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajacontraseña);
         if (!Utilidades.contrasenaValida(pass)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajacontraseña);
             wrapmail.setError("Contraseña invalida mín");
             caja_texto.setText("");
         } else {
@@ -159,9 +161,9 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
     public void validarPassRep (String pass2, EditText caja_texto) {
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
         if (!Utilidades.comprobarIgual(actividad.findViewById(R.id.cajacontraseña).toString(),pass2)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
             wrapmail.setError("Las contraseñas no coinciden");
             caja_texto.setText("");
         } else {

@@ -21,7 +21,7 @@ public class Utilidades {
 
     private static final String PATRON_PWD = "\\w{6,45}";
 
-    private static final String PATRON_NOMBRE = "\\w{6,45}";
+    private static final String PATRON_NOMBRE = "\\w{2,45}";
 
 
     /**
@@ -44,7 +44,7 @@ public class Utilidades {
      */
 
     public static boolean nifValido (String cif) {
-
+        cif = cif.toUpperCase();
         Validador val = new Validador();
         int ret = val.checkNif(cif);
         if( ret > 0) {
