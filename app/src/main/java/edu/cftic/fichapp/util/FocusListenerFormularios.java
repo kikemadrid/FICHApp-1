@@ -193,7 +193,7 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajacontraseña);
         if (!Utilidades.contrasenaValida(pass)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail.setError("Contraseña invalida mín");
+            wrapmail.setError("Incorrecto. Min 6 caracteres");
             caja_texto.setText("");
         } else {
             wrapmail.setErrorEnabled(false);
@@ -207,8 +207,10 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
      */
 
     public void validarPassRep (String pass2, EditText caja_texto) {
-        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
-        if (!Utilidades.comprobarIgual(actividad.findViewById(R.id.cajacontraseña).toString(),pass2)){
+        wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilrepcontraseña);
+        EditText edit_pass1 = actividad.findViewById(R.id.cajacontraseña);
+        String pass1 = edit_pass1.getText().toString();
+        if (!Utilidades.comprobarIgual(pass1,pass2)){
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Las contraseñas no coinciden");
             caja_texto.setText("");

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:id="@+id/elementoraiz"
+    android:id="@+id/empresa_root"
     android:orientation="vertical"
     tools:context=".acitividades.RegistroEmpleadoActivity">
 
@@ -140,7 +140,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonRegistrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -150,7 +150,7 @@
         android:text="REGISTRAR" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonModificar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -160,7 +160,7 @@
         android:text="MODIFICAR" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonEliminar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"

@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".acitividades.RegistroEmpleadoActivity" />
+        <activity android:name=".acitividades.RegistroEmpleadoActivity">
+
+        </activity>
         <activity android:name=".acitividades.MenuEmpleadoActivity" />
         <activity android:name=".acitividades.MenuGestorActivity" />
         <activity android:name=".acitividades.AyudaActivity" />
