@@ -67,17 +67,27 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
         }
     }
 
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (CIF) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param cif
+     * @param caja_texto
+     */
     public void validarCif (String cif, EditText caja_texto){
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcif);
         if (!Utilidades.nifValido (cif)) {
             //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail.setError("CIF Incorrecto");
+            wrapmail.setError("Incorrecto A12345678");
             caja_texto.setText("");
         } else {
             wrapmail.setErrorEnabled(false);
         }
     }
 
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (NOMBRE EMPRESA) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param empresa
+     * @param caja_texto
+     */
     public void validarNombreEmpresa (String empresa, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilnombreempresa);
         if (!Utilidades.validarNombre(empresa)){
@@ -90,6 +100,11 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
 
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (NOMBRE RESPONSABLE) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param nombre
+     * @param caja_texto
+     */
 
     public void validarNombreResponsable (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilresponsable);
@@ -101,7 +116,11 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
             wrapmail.setErrorEnabled(false);
         }
     }
-
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (EMAIL) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param email
+     * @param caja_texto
+     */
 
     public void validarEmail (String email, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
@@ -115,6 +134,11 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     }
 
 
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (NOMBRE EMPLEADO) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param nombre
+     * @param caja_texto
+     */
     public void validarNombreEmpleado (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajanombre);
         if (!Utilidades.validarNombre(nombre)){
@@ -125,6 +149,12 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
             wrapmail.setErrorEnabled(false);
         }
     }
+
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (NOMBRE USUARIO) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param nombre
+     * @param caja_texto
+     */
 
     public void validarNombreUsuario (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajausername);
@@ -137,6 +167,12 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
         }
     }
 
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (APELLIDOS USUARIO) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param nombre
+     * @param caja_texto
+     */
+
     public void validarApellidosEmpleado (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajaapellidos);
         if (!Utilidades.validarNombre(nombre)){
@@ -147,6 +183,11 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
             wrapmail.setErrorEnabled(false);
         }
     }
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (PASSWORD) Y EL EDITTEXT DONDE SE INGRESO. EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param pass
+     * @param caja_texto
+     */
 
     public void validarPass(String pass, EditText caja_texto){
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajacontraseña);
@@ -159,6 +200,11 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
         }
 
     }
+    /**
+     * METODO QUE RECIBE CADENA A COMPROBAR (PASS) Y EL EDITTEXT DONDE SE INGRESO. COMPARA QUE LOS PASSWORD COINCIDAN EN CASO DE SER INCORRECTO COMUNICA AL TEXTINPUTLAYOUT CORRESPONDIENTE
+     * @param pass2
+     * @param caja_texto
+     */
 
     public void validarPassRep (String pass2, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);

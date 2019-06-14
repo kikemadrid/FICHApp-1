@@ -59,22 +59,18 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_empresa);
         dataBase = new DB();
+        //#########PRUEBA###########
+        empresa = dataBase.empresas.primero();
+        //########################
         // referenciamos todos los objetos de la vista
         referenciarObjetos();
         //Activamos el escuchador que al peder el foco relizará las posteriores validaciones por cada caja del formulario
         activarFocoValidacion();
 
 
-        //#########PRUEBA###########
-        empresa = new Empresa();
-        //########################
-
-
-
         //Recuperación de los datos del Intent
         Intent intent = getIntent();
         empleado = (Empleado) intent.getSerializableExtra(Constantes.EMPLEADO);
-        accion_menu = intent.getStringExtra(Constantes.ACCION_MENU_GESTOR);
 
         logicaBotonesGestor();
 
@@ -145,7 +141,6 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
                 Log.d("MIAPP", "La foto ha sido seleccionada");
                 this.photo_uri = data.getData();
                 this.imageView.setImageURI(photo_uri);
-                empresa.setRutalogo(photo_uri.toString());
                 break;
 
             case RESULT_CANCELED:
@@ -161,7 +156,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
      */
     public void logicaBotonesGestor() {
         // En principio nunca debería llegar a este menú un empleado, comentar con jefe de proyecto como proceder
-        if (empleado != null && accion_menu != null && !accion_menu.equals("")) {
+        /*if (empleado != null && accion_menu != null && !accion_menu.equals("")) {
             if (empleado.getRol().equals("empleado")) {
                 botonM.setEnabled(false);
                 botonE.setEnabled(false);
@@ -184,6 +179,15 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
 
 
             }
+        }*/
+
+        if (empresa==null){
+            //primera vez
+            botonM.setEnabled(false);
+            botonE.setEnabled(false);
+        }else {
+            botonN.setEnabled(false);
+            setearDatosEmpresa();
         }
     }
 
@@ -261,8 +265,8 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
     }
 
     public Empresa recogerDatosCajas() {
-        return null;
-        //return new Empresa(cajatextocif.getText().toString(), cajatextonombreempresa.getText().toString(), cajatextoresp.getText().toString(), cajatextomail.getText().toString());
+
+        return new Empresa(cajatextocif.getText().toString(), cajatextonombreempresa.getText().toString(), cajatextoresp.getText().toString(), cajatextomail.getText().toString(),photo_uri.toString());
     }
 
     /**
@@ -285,21 +289,12 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         this.finish();
     }
 
-    /**
-     * MÉTODO QUE LANZA EL INTENT HACIA EL MENÚ DEL EMPLEADO
-     */
-    public void lanzarIntentMenuEmpleado() {
-        intent = new Intent(this, MenuEmpleadoActivity.class);
-        intent.putExtra("EMPLEADO", empleado);
-        startActivity(intent);
-        this.finish();
-    }
 
     /**
      * MÉTODO QUE REFERENCIA TODOS LOS OBJETOS DE LA VISTA PARA SU POSTERIOR USO
      */
     public void referenciarObjetos() {
-        imageView = findViewById(R.id.imagenEmpresa);
+        imageView = findViewById(R.id.imagen_empresa);
         botonM = (Button) findViewById(R.id.botonmodificar);
         botonE = (Button) findViewById(R.id.botoneliminar);
         botonN = (Button) findViewById(R.id.botonenviar);
