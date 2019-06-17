@@ -152,7 +152,6 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
     /**
      * METODO QUE RECIBE EL OBJETO EMPLEADO Y EN FUNCIÓN DEL ROL Y LA ACCIÓN RECIBIDA EN EL INTENT HABILITA BOTONES
      * Y SETEA VALORES EN LOS EDITTEXT
-     *   // TODO COMENTAR CON PROFE QUE VAMOS A RECIBIR, EMPLEADO, ACCION (NUEVO O MODIFICAR/ELIMINAR) Y EN CASO DE MOD/ELIM NECESITO ID EMPRESA U OBJETO
      */
     public void logicaBotonesGestor() {
         // En principio nunca debería llegar a este menú un empleado, comentar con jefe de proyecto como proceder

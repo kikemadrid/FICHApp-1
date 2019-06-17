@@ -1,14 +1,12 @@
 package edu.cftic.fichapp.util;
 
-import android.util.Log;
+
 import android.util.Patterns;
-import android.view.View;
-import android.view.ViewGroup;
+
 
 import com.aeat.valida.Validador;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,11 +15,8 @@ public class Utilidades {
 
     //########################## VALIDACIONES FORMULARIOS REGISTRO #######################################
 
-    private static final String letras_validas = "ABCDEFGHJPQRSUV";
-
     private static final String PATRON_PWD = "\\w{6,45}";
 
-    private static final String PATRON_NOMBRE = "\\w{2,45}";
 
 
     /**
@@ -51,6 +46,7 @@ public class Utilidades {
             return true;
         }
         else {
+
             return false;
         }
 
@@ -58,17 +54,15 @@ public class Utilidades {
 
     /**
      * Valida que una cadena tenga un tamaño. Se usa para validar nombre de usuario y empresa
-     * @param nombre_usuario
+     * @param nombre
      * @return TRUE EN CASO CORRECTO
      */
 
-    public static boolean validarNombre (String nombre_usuario)
+    public static boolean validarNombre (String nombre)
     {
         boolean bdev = false;
 
-        Pattern p = Pattern.compile(PATRON_NOMBRE);
-        Matcher m = p.matcher(nombre_usuario);
-        bdev = m.matches();
+        bdev = (nombre.length() == 0 || nombre == null )? false :true;
 
         return bdev;
     }
@@ -109,7 +103,7 @@ public class Utilidades {
      * METODO QUE LIMPIAR EL FOCO DE LOS TIPOS DE OBJETOS ENVIADOS QUE TENGAMOS EN LA ACTIVITY
      * @param vista_raiz Parámetro que marca el objeto raiz de un layout
      * @param tipo_buscado Parámetro que marca el tipo de objetos que vamos a limpiar
-     */
+
     public static void limpiarFocusEditText (ViewGroup vista_raiz, Class tipo_buscado)
     {
         List<View> lvistas = null;
@@ -146,4 +140,5 @@ public class Utilidades {
             }
         }
     }
+     */
 }

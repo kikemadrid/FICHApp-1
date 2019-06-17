@@ -75,8 +75,7 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarCif (String cif, EditText caja_texto){
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcif);
         if (!Utilidades.nifValido (cif)) {
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
-            wrapmail.setError("Incorrecto A12345678");
+            wrapmail.setError("Incorrecto A12345678/1234567A");
             caja_texto.setText("");
         } else {
             wrapmail.setErrorEnabled(false);
@@ -91,7 +90,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarNombreEmpresa (String empresa, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilnombreempresa);
         if (!Utilidades.validarNombre(empresa)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto.");
             caja_texto.setText("");
         } else {
@@ -109,7 +107,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarNombreResponsable (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilresponsable);
         if (!Utilidades.validarNombre(nombre)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto.");
             caja_texto.setText("");
         } else {
@@ -125,7 +122,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarEmail (String email, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilemail);
         if (!Utilidades.emailValido (email)) {
-            // Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Mail incorrecto");
             caja_texto.setText("");
         } else {
@@ -142,7 +138,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarNombreEmpleado (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajanombre);
         if (!Utilidades.validarNombre(nombre)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto. Entre 1 y 30 caracteres");
             caja_texto.setText("");
         } else {
@@ -159,7 +154,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarNombreUsuario (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajausername);
         if (!Utilidades.validarNombre(nombre)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto. Entre 1 y 30 caracteres");
             caja_texto.setText("");
         } else {
@@ -176,7 +170,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarApellidosEmpleado (String nombre, EditText caja_texto) {
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajaapellidos);
         if (!Utilidades.validarNombre(nombre)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto. Entre 1 y 30 caracteres");
             caja_texto.setText("");
         } else {
@@ -192,7 +185,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
     public void validarPass(String pass, EditText caja_texto){
         wrapmail = (TextInputLayout)actividad.findViewById(R.id.tilcajacontraseña);
         if (!Utilidades.contrasenaValida(pass)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Incorrecto. Min 6 caracteres");
             caja_texto.setText("");
         } else {
@@ -211,7 +203,6 @@ public class FocusListenerFormularios implements View.OnFocusChangeListener {
         EditText edit_pass1 = actividad.findViewById(R.id.cajacontraseña);
         String pass1 = edit_pass1.getText().toString();
         if (!Utilidades.comprobarIgual(pass1,pass2)){
-            //Utilidades.limpiarFocusEditText(viewGroup,EditText.class);
             wrapmail.setError("Las contraseñas no coinciden");
             caja_texto.setText("");
         } else {
