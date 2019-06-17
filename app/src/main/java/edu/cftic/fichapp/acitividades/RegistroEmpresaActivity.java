@@ -39,29 +39,30 @@ import edu.cftic.fichapp.util.FocusListenerFormularios;
 public class RegistroEmpresaActivity extends AppCompatActivity {
 
 
-    EditText cajatextomail;
-    EditText cajatextocif;
-    EditText cajatextoresp;
-    EditText cajatextonombreempresa;
-    Button botonM;
-    Button botonN;
-    Button botonE;
-    DB dataBase;
-    Empleado empleado;
-    Empresa empresa;
-    String accion_menu; // para saber desde que acción del menú del gestor nos esta llegando
-    Intent intent;
-    private Uri photo_uri; // para almacenar la ruta de la imagen
+    private EditText cajatextomail;
+    private EditText cajatextocif;
+    private EditText cajatextoresp;
+    private EditText cajatextonombreempresa;
+    private Button botonM;
+    private Button botonN;
+    private Button botonE;
     private ImageView imageView;
+
+    private DB dataBase;
+    private Empleado empleado;
+    private Empresa empresa;
+    private Intent intent;
+    private Uri photo_uri; // para almacenar la ruta de la imagen
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_empresa);
         dataBase = new DB();
-        //#########PRUEBA###########
+
         empresa = dataBase.empresas.primero();
-        //########################
+
         // referenciamos todos los objetos de la vista
         referenciarObjetos();
         //Activamos el escuchador que al peder el foco relizará las posteriores validaciones por cada caja del formulario
@@ -154,34 +155,9 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
      * Y SETEA VALORES EN LOS EDITTEXT
      */
     public void logicaBotonesGestor() {
-        // En principio nunca debería llegar a este menú un empleado, comentar con jefe de proyecto como proceder
-        /*if (empleado != null && accion_menu != null && !accion_menu.equals("")) {
-            if (empleado.getRol().equals("empleado")) {
-                botonM.setEnabled(false);
-                botonE.setEnabled(false);
-                botonN.setEnabled(false);
-                // para colocar la flecha hacia detras
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                // equivalente pero colocando una flecha personalizada
-                //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher);
-            } else if (accion_menu.equals(Constantes.ACCION_NUEVA_EMPRESA)) {
-                botonE.setEnabled(false);
-                botonM.setEnabled(false);
-            } else if (accion_menu.equals(Constantes.ACCION_MODIFICACION_EMPRESA)) {
-                empresa = dataBase.empresas.primero();
-                if (empresa != null){
-                    botonN.setEnabled(false);
-                    setearDatosEmpresa();
-                }else{
-                    empresa= new Empresa();
-                }
-
-
-            }
-        }*/
-
         if (empresa==null){
             //primera vez
+            empresa = new Empresa();
             botonM.setEnabled(false);
             botonE.setEnabled(false);
         }else {
@@ -194,10 +170,13 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
      * MÉTODO QUE SETEA TODOS LOS VALORES DE LA EMPRESA
      */
     public void setearDatosEmpresa () {
+
         cajatextocif.setText(empresa.getCif());
         cajatextonombreempresa.setText(empresa.getNombre_empresa());
         cajatextoresp.setText(empresa.getResponsable());
         cajatextomail.setText(empresa.getEmail());
+
+        if(empresa.getRutalogo()!= null)
         imageView.setImageURI(Uri.parse(empresa.getRutalogo()));
 
     }
@@ -221,8 +200,10 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
      */
     public void registrar(View v) {
 
-        dataBase.empresas.nuevo(recogerDatosCajas());
-        lanzarIntentLogin();
+        if(recogerDatosCajas()){
+            dataBase.empresas.nuevo(empresa);
+            lanzarIntentLogin();
+        }
 
     }
 
@@ -232,9 +213,10 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
      * @param v Boton que lanza el método
      */
     public void modificar(View v) {
-
-        dataBase.empresas.actualizar(recogerDatosCajas());
-        lanzarIntentMenuGestor();
+        if(recogerDatosCajas()){
+            dataBase.empresas.actualizar(empresa);
+            lanzarIntentMenuGestor();
+        }
 
     }
 
@@ -251,8 +233,10 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                dataBase.empresas.eliminar(recogerDatosCajas().getId_empresa());
-                lanzarIntentMenuGestor();
+                if (recogerDatosCajas()){
+                    dataBase.empresas.eliminar(empresa.getId_empresa());
+                    lanzarIntentMenuGestor();
+                }
             }
         });
         dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -263,9 +247,46 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         dialogo1.show();
     }
 
-    public Empresa recogerDatosCajas() {
+    /**
+     * METODO QUE RECOGE LOS DATOS DE LOS EDITTEXT, COMPRUEBA QUE TENGAN VALORES Y EN CASO AFIRMATIVO LOS SETEA EN EL OBJETO EMPRESA Y DEVUELVE UN TRUE
+     * @return Retorna false si faltan datos y true si esta completo (logo de la empresa es opcional)
+     */
+    public boolean recogerDatosCajas() {
 
-        return new Empresa(cajatextocif.getText().toString(), cajatextonombreempresa.getText().toString(), cajatextoresp.getText().toString(), cajatextomail.getText().toString(),photo_uri.toString());
+        boolean isValido = false;
+        String cif=cajatextocif.getText().toString();
+        String nombreEmpresa=cajatextonombreempresa.getText().toString();
+        String responsable =  cajatextoresp.getText().toString();
+        String email = cajatextomail.getText().toString();
+        String urlLogo = photo_uri.toString();
+
+        if(cif != null){
+            if (nombreEmpresa != null){
+                if (responsable != null){
+                    if (email != null) {
+
+                        empresa.setCif(cif.toUpperCase());
+                        empresa.setNombre_empresa(nombreEmpresa);
+                        empresa.setResponsable(responsable);
+                        empresa.setEmail(email);
+                        empresa.setRutalogo(urlLogo);
+                        return isValido=true;
+                    }else{
+                        Toast.makeText(this,"EL EMAIL DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+                    }
+
+                }else{
+                    Toast.makeText(this,"EL NOMBRE DEL RESPONSABLE DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+                }
+
+            } else {
+                Toast.makeText(this,"EL NOMBRE DE LA EMPRESA DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+            }
+        }else{
+            Toast.makeText(this,"EL CIF DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+        }
+        return isValido;
+
     }
 
     /**

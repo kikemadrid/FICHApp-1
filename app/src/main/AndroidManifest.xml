@@ -25,6 +25,7 @@
         <activity android:name=".acitividades.MenuGestorActivity" />
         <activity android:name=".acitividades.AyudaActivity" />
         <activity android:name=".acitividades.AvisosLegalesActivity" />
+        <activity android:name=".acitividades.LoginActivity" />
         <activity android:name=".acitividades.MainActivity">
         </activity>
     </application>
