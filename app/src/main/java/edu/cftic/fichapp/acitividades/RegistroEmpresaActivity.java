@@ -112,7 +112,26 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         Intent intent_pide_foto = new Intent();
         intent_pide_foto.setAction(Intent.ACTION_GET_CONTENT);
         intent_pide_foto.setType("image/*"); // tipo mime
+        desactivarModoEstricto();
         startActivityForResult(intent_pide_foto, Constantes.CODIGO_PETICION_SELECCIONAR_FOTO);
+    }
+
+
+    /**
+     * METODO PARA PODER GUARDAR MIS FOTOS DONDE YO QUIERA PQ GOOGLE ME OBLIGA A DECLARARLO EN EL MANIFEST
+     */
+    private void desactivarModoEstricto()
+    {
+        if (Build.VERSION.SDK_INT >=24)
+        {
+            try{
+                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            }catch (Exception e)
+            {
+
+            }
+        }
     }
 
     /**
@@ -167,7 +186,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
     }
 
     /**
-     * MÉTODO QUE SETEA TODOS LOS VALORES DE LA EMPRESA
+     * MÉTODO QUE SETEA EN LOS CAMPOS DEL FORMULARIO TODOS LOS VALORES DE LA EMPRESA
      */
     public void setearDatosEmpresa () {
 
@@ -176,8 +195,10 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         cajatextoresp.setText(empresa.getResponsable());
         cajatextomail.setText(empresa.getEmail());
 
-        if(empresa.getRutalogo()!= null)
-        imageView.setImageURI(Uri.parse(empresa.getRutalogo()));
+        if(empresa.getRutalogo()!= null) {
+            Log.d(Constantes.TAG_APP, "RUTA =  " + empresa.getRutalogo());
+            imageView.setImageURI(Uri.parse(empresa.getRutalogo()));
+        }
 
     }
 
@@ -202,7 +223,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
 
         if(recogerDatosCajas()){
             dataBase.empresas.nuevo(empresa);
-            lanzarIntentLogin();
+            lanzarIntentRegistroEmpleado();
         }
 
     }
@@ -258,43 +279,48 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         String nombreEmpresa=cajatextonombreempresa.getText().toString();
         String responsable =  cajatextoresp.getText().toString();
         String email = cajatextomail.getText().toString();
-        String urlLogo = photo_uri.toString();
+        String urlLogo= null;
+        if (photo_uri != null){
+            Log.d(Constantes.TAG_APP," uri " + photo_uri);
+            urlLogo = photo_uri.toString();
+        }
 
-        if(cif != null){
-            if (nombreEmpresa != null){
-                if (responsable != null){
-                    if (email != null) {
+
+        if(cif.length() != 0){
+            if (nombreEmpresa.length() != 0){
+                if (responsable.length() != 0){
+                    if (email.length() != 0) {
 
                         empresa.setCif(cif.toUpperCase());
                         empresa.setNombre_empresa(nombreEmpresa);
                         empresa.setResponsable(responsable);
                         empresa.setEmail(email);
+                        Log.d(Constantes.TAG_APP," uri " + urlLogo);
                         empresa.setRutalogo(urlLogo);
                         return isValido=true;
                     }else{
-                        Toast.makeText(this,"EL EMAIL DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+                        Toast.makeText(this,"EL EMAIL DEBE CONTENER DATOS",Toast.LENGTH_LONG).show();
                     }
 
                 }else{
-                    Toast.makeText(this,"EL NOMBRE DEL RESPONSABLE DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+                    Toast.makeText(this,"EL NOMBRE DEL RESPONSABLE DEBE CONTENER DATOS",Toast.LENGTH_LONG).show();
                 }
 
             } else {
-                Toast.makeText(this,"EL NOMBRE DE LA EMPRESA DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+                Toast.makeText(this,"EL NOMBRE DE LA EMPRESA DEBE CONTENER DATOS",Toast.LENGTH_LONG).show();
             }
         }else{
-            Toast.makeText(this,"EL CIF DEBE CONTENER DATOS",Toast.LENGTH_LONG);
+            Toast.makeText(this,"EL CIF DEBE CONTENER DATOS",Toast.LENGTH_LONG).show();
         }
         return isValido;
 
     }
 
     /**
-     * MÉTODO QUE LANZA EL INTENT HACIA EL LOGIN
+     * MÉTODO QUE LANZA EL INTENT HACIA EL REGISTRO DEL GESTOR
      */
-    public void lanzarIntentLogin() {
-        intent = new Intent(this, LoginActivity.class);
-        intent.putExtra("EMPLEADO", empleado);
+    public void lanzarIntentRegistroEmpleado() {
+        intent = new Intent(this, RegistroEmpleadoActivity.class);
         startActivity(intent);
         this.finish();
     }
