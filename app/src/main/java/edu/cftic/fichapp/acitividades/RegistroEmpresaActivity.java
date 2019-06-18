@@ -3,6 +3,7 @@ package edu.cftic.fichapp.acitividades;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -74,7 +76,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         empleado = (Empleado) intent.getSerializableExtra(Constantes.EMPLEADO);
 
         logicaBotonesGestor();
-
+        desactivarModoEstricto();
         // Esta instrucción pide los permisos para acceder a galería de fotos.
         ActivityCompat.requestPermissions(this, Constantes.PERMISOS, Constantes.CODIGO_PETICION_PERMISOS);
 
@@ -112,7 +114,7 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         Intent intent_pide_foto = new Intent();
         intent_pide_foto.setAction(Intent.ACTION_GET_CONTENT);
         intent_pide_foto.setType("image/*"); // tipo mime
-        desactivarModoEstricto();
+
         startActivityForResult(intent_pide_foto, Constantes.CODIGO_PETICION_SELECCIONAR_FOTO);
     }
 
@@ -197,7 +199,13 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
 
         if(empresa.getRutalogo()!= null) {
             Log.d(Constantes.TAG_APP, "RUTA =  " + empresa.getRutalogo());
-            imageView.setImageURI(Uri.parse(empresa.getRutalogo()));
+            /*String[] array = empresa.getRutalogo().split("%");
+
+            String nuevaRuta = array[0] +"%25"+ array[1];
+            Log.d(Constantes.TAG_APP, "nuevaRuta " +nuevaRuta);*/
+            //empresa.setRutalogo(getFilePath());
+            Log.d(Constantes.TAG_APP, "RUTA =  " + empresa.getRutalogo());
+            imageView.setImageURI(Uri.parse(empresa.getRutalogo() ));
         }
 
     }
@@ -282,7 +290,11 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         String urlLogo= null;
         if (photo_uri != null){
             Log.d(Constantes.TAG_APP," uri " + photo_uri);
-            urlLogo = photo_uri.toString();
+            urlLogo = getFilePath();
+            Log.d(Constantes.TAG_APP," uri " + photo_uri);
+            //urlLogo = photo_uri.toString();
+        }else {
+            urlLogo = empresa.getRutalogo();
         }
 
 
@@ -315,6 +327,33 @@ public class RegistroEmpresaActivity extends AppCompatActivity {
         return isValido;
 
     }
+
+    /**
+     *  PROBLEMAS CUANDO RECUPERAMOS UNA FOTO DE LA GALERÍA Y LA INTENTAMOS SETEAR EN UN IMAGEVIEW PREVIA CONVERSIÓN A UNA URI
+     *  YA QUE NOS DEVUELVE UNA URI QUE COMIENZA CON CONTENT:
+     *
+     *  EN CAMBIO ESTE MÉTODO UTILIZAR UN EL getContentResolver() PARA DEVOLVER UNA RUTA CONVERTIDA DE ESTE TIPO:
+     *  /storage/emulated/0/DCIM/Camera/IMG_20190607_095229.jpg
+     *  // https://stackoverflow.com/questions/5657411/android-getting-a-file-uri-from-a-content-uri#answer-12603415
+     * @return
+     */
+    private String getFilePath() {
+        String filePath = null;
+        if (photo_uri != null && "content".equals(photo_uri.getScheme())) {
+            Cursor cursor = this.getContentResolver().query(photo_uri, new String[]{android.provider.MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            cursor.moveToFirst();
+            filePath = cursor.getString(0);
+            cursor.close();
+        } else {
+            if( photo_uri != null) {
+                filePath = photo_uri.getPath();
+            }
+        }
+        Log.d("MIAPP", "Chosen path = " + filePath);
+
+        return filePath;
+    }
+
 
     /**
      * MÉTODO QUE LANZA EL INTENT HACIA EL REGISTRO DEL GESTOR
